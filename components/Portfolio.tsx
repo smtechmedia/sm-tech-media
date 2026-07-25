@@ -8,7 +8,7 @@ type Category =
   | "Corporate"
   | "Political"
   | "Festival"
-  | "Thumbnails"
+  | "YouTube"
   | "Websites"
   | "Videos";
 
@@ -63,7 +63,7 @@ const thumbnailWorks: PortfolioItem[] = Array.from(
   (_, index) => ({
     id: 300 + index,
     title: `YouTube Thumbnail ${String(index + 1).padStart(2, "0")}`,
-    category: "Thumbnails",
+    category: "YouTube",
     image: `/portfolio/thumbnails/thumbnail-${String(index + 1).padStart(
       2,
       "0"
@@ -96,7 +96,7 @@ const categories: {
     count: 9,
   },
   {
-    name: "Thumbnails",
+    name: "YouTube",
     count: 6,
   },
   {
@@ -224,21 +224,21 @@ export default function Portfolio() {
               <span className="h-2 w-2 rounded-full bg-[#4DA3FF]" />
 
               <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#173652] sm:text-sm">
-                Creative Portfolio
+                Our Portfolio
               </span>
             </div>
 
             <h2 className="text-3xl font-black leading-tight tracking-[-0.035em] text-[#173652] sm:text-4xl lg:text-5xl">
-              Explore Our Latest
+              Discover Our Best
               <span className="block bg-gradient-to-r from-[#173652] via-[#1F4566] to-[#4DA3FF] bg-clip-text text-transparent">
-                Creative Works
+                Creative Projects
               </span>
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
-              A collection of corporate designs, political campaigns,
-              festival creatives and YouTube thumbnails created by SM Tech
-              Media.
+              A showcase of corporate designs, political campaigns, festival
+              creatives, YouTube projects and digital experiences created by
+              SM Tech Media.
             </p>
 
             <div className="mt-6 inline-flex items-center gap-3 rounded-2xl border border-[#173652]/10 bg-white px-5 py-3 shadow-[0_12px_35px_rgba(23,54,82,0.08)]">
@@ -247,7 +247,7 @@ export default function Portfolio() {
               </span>
 
               <span className="text-sm font-bold text-[#173652]">
-                Creative Works
+                Creative Projects
               </span>
             </div>
           </motion.div>
@@ -357,7 +357,7 @@ export default function Portfolio() {
                   >
                     <div
                       className={`relative w-full overflow-hidden ${
-                        item.category === "Thumbnails"
+                        item.category === "YouTube"
                           ? "aspect-video"
                           : "aspect-square"
                       }`}
@@ -432,12 +432,12 @@ export default function Portfolio() {
 
             <div className="relative text-center lg:text-left">
               <p className="text-2xl font-black text-white sm:text-3xl">
-                Have a project in mind?
+                Let&apos;s Build Your Brand Together
               </p>
 
               <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
-                Let&apos;s create powerful designs, videos and digital
-                experiences that help your brand stand out.
+                From strategy to design and video, we create digital experiences
+                that make your brand look professional and stand out.
               </p>
             </div>
 

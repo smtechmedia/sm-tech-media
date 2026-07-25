@@ -114,6 +114,7 @@ ${formData.message}
     )}`;
 
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setFormData(initialFormData);
   };
 
   return (
@@ -481,6 +482,9 @@ ${formData.message}
                         onChange={handleChange}
                         placeholder="Enter your phone number"
                         required
+                        inputMode="numeric"
+pattern="[0-9]{10}"
+maxLength={10}
                         className="h-14 w-full rounded-2xl border border-[#173652]/10 bg-[#f8fbfe] pl-11 pr-4 text-sm text-[#173652] outline-none transition-all duration-300 placeholder:text-slate-400 hover:border-[#173652]/20 focus:border-[#4DA3FF]/60 focus:bg-white focus:shadow-[0_0_0_4px_rgba(77,163,255,0.1)]"
                       />
                     </div>
