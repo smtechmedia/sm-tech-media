@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaGlobe,
@@ -8,6 +9,7 @@ import {
   FaVideo,
   FaSearch,
   FaVoteYea,
+  FaLightbulb,
 } from "react-icons/fa";
 
 const services = [
@@ -53,6 +55,12 @@ const services = [
     description:
       "Social media management, creative designing and campaign strategy for political leaders.",
   },
+  {
+    icon: FaLightbulb,
+    title: "Branding Solutions",
+    description:
+      "Logo design, brand identity, marketing materials and creative strategy for a strong brand presence.",
+  },
 ];
 
 const containerVariants = {
@@ -82,6 +90,23 @@ const cardVariants = {
 };
 
 export default function Services() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateDevice = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateDevice();
+    mediaQuery.addEventListener("change", updateDevice);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateDevice);
+    };
+  }, []);
+
   return (
     <section
       id="services"
@@ -133,13 +158,11 @@ export default function Services() {
             opacity: 0,
             y: 30,
           }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
+          animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           viewport={{
             once: true,
-            amount: 0.3,
+            amount: 0.12,
           }}
           transition={{
             duration: 0.7,
@@ -181,14 +204,7 @@ export default function Services() {
 
         {/* Service Cards */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{
-            once: true,
-            amount: 0.16,
-          }}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           style={{
             perspective: "1200px",
           }}
@@ -199,7 +215,33 @@ export default function Services() {
             return (
               <motion.article
                 key={service.title}
-                variants={cardVariants}
+                initial={{
+                  opacity: 0,
+                  y: 48,
+                  scale: 0.94,
+                }}
+                animate={
+                  isMobile
+                    ? {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                      }
+                    : undefined
+                }
+                whileInView={
+                  isMobile
+                    ? undefined
+                    : {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                      }
+                }
+                viewport={{
+                  once: true,
+                  amount: 0.12,
+                }}
                 whileHover={{
                   y: -12,
                   scale: 1.02,
@@ -207,18 +249,14 @@ export default function Services() {
                   rotateY: index % 2 === 0 ? 3 : -3,
                 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 220,
-                  damping: 18,
+                  duration: 0.62,
+                  delay: index * 0.07,
+                  ease: "easeOut",
                 }}
                 style={{
                   transformStyle: "preserve-3d",
                 }}
-                className={`group relative h-full ${
-                  index === services.length - 1
-                    ? "sm:col-span-2 lg:col-span-1"
-                    : ""
-                }`}
+                className="group relative h-full"
               >
                 {/* Glow Border */}
                 <div className="absolute -inset-px rounded-[31px] bg-gradient-to-br from-[#4DA3FF]/0 via-[#4DA3FF]/0 to-[#173652]/0 opacity-0 blur-sm transition-all duration-500 group-hover:from-[#4DA3FF]/70 group-hover:via-[#4DA3FF]/25 group-hover:to-[#173652]/25 group-hover:opacity-100" />
@@ -250,11 +288,16 @@ export default function Services() {
                       scale: 0.55,
                       rotate: -12,
                     }}
-                    whileInView={{
-                      opacity: 1,
-                      scale: 1,
-                      rotate: 0,
-                    }}
+                    animate={
+                      isMobile
+                        ? { opacity: 1, scale: 1, rotate: 0 }
+                        : undefined
+                    }
+                    whileInView={
+                      isMobile
+                        ? undefined
+                        : { opacity: 1, scale: 1, rotate: 0 }
+                    }
                     viewport={{
                       once: true,
                       amount: 0.5,
@@ -314,10 +357,10 @@ export default function Services() {
                       opacity: 0,
                       y: 14,
                     }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
+                    animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                    whileInView={
+                      isMobile ? undefined : { opacity: 1, y: 0 }
+                    }
                     viewport={{
                       once: true,
                     }}
@@ -335,10 +378,10 @@ export default function Services() {
                       opacity: 0,
                       y: 12,
                     }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
+                    animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                    whileInView={
+                      isMobile ? undefined : { opacity: 1, y: 0 }
+                    }
                     viewport={{
                       once: true,
                     }}
@@ -357,10 +400,10 @@ export default function Services() {
                       opacity: 0,
                       y: 10,
                     }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                    }}
+                    animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                    whileInView={
+                      isMobile ? undefined : { opacity: 1, y: 0 }
+                    }
                     viewport={{
                       once: true,
                     }}
@@ -410,13 +453,11 @@ export default function Services() {
             opacity: 0,
             y: 28,
           }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
+          animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           viewport={{
             once: true,
-            amount: 0.25,
+            amount: 0.12,
           }}
           transition={{
             duration: 0.7,
@@ -444,7 +485,7 @@ export default function Services() {
             href="#contact"
             className="relative mx-auto mt-7 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-white px-7 py-4 text-sm font-black text-[#173652] shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#edf7ff] sm:w-auto lg:mx-0 lg:mt-0"
           >
-            Get Started
+            Start Your Project
             <span className="text-lg">→</span>
           </a>
         </motion.div>
