@@ -311,7 +311,7 @@ export default function Hero() {
               initial={false}
               animate={{ y: [0, -9, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-7 left-1/2 z-30 flex w-max max-w-[90%] -translate-x-1/2 items-center gap-3 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-[0_18px_45px_rgba(23,54,82,0.18)] backdrop-blur-xl sm:-bottom-9 sm:left-auto sm:right-4 sm:translate-x-0 sm:px-5"
+              className="absolute -bottom-7 left-1/2 z-30 hidden w-max max-w-[90%] -translate-x-1/2 items-center gap-3 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-[0_18px_45px_rgba(23,54,82,0.18)] backdrop-blur-xl md:flex md:-bottom-9 md:left-auto md:right-4 md:translate-x-0 md:px-5"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#4DA3FF]/10 text-[#4DA3FF] sm:h-11 sm:w-11">
                 <FaBriefcase />

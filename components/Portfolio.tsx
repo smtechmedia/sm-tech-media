@@ -17,6 +17,8 @@ type PortfolioItem = {
   title: string;
   category: Category;
   image: string;
+  link?: string;
+  actionLabel?: string;
 };
 
 const corporateWorks: PortfolioItem[] = Array.from(
@@ -71,17 +73,64 @@ const thumbnailWorks: PortfolioItem[] = Array.from(
   })
 );
 
+const websiteWorks: PortfolioItem[] = [
+  {
+    id: 401,
+    title: "Pandu Prem Kumar Foundation",
+    category: "Websites",
+    image: "/portfolio/websites/website-01.png",
+    link: "https://www.pandupremkumarfoundation.com/",
+    actionLabel: "View Website",
+  },
+  {
+    id: 402,
+    title: "SM Tech Media",
+    category: "Websites",
+    image: "/portfolio/websites/website-02.png",
+    link: "https://www.smtechmedia.in/",
+    actionLabel: "View Website",
+  },
+];
+
+const videoLinks = [
+  "https://drive.google.com/file/d/1TFm6VhbsSDXpcD4djKwFBi4-iBZ3cFzy/view?usp=drive_link",
+  "https://drive.google.com/file/d/18SQYI1JOa9ddIznKo0rOsV_zXT1uIV5C/view?usp=drive_link",
+  "https://drive.google.com/file/d/1osyYM3uFYlIiQlHB3eiMzSPC0a8stc0h/view?usp=drive_link",
+  "https://drive.google.com/file/d/1crmaAa-a7j8jWmpmfhb5d70wxwKNcMZP/view?usp=drive_link",
+  "https://drive.google.com/file/d/1RjVMqNkElzW4IfXuiiPJMZX7Dpgc0-O8/view?usp=drive_link",
+  "https://drive.google.com/file/d/13B3xTj6prr76_9ZVwnn1cc32cBIS2ifk/view?usp=drive_link",
+  "https://drive.google.com/file/d/1m6j6Ii_Ky77j_NrZWRSej9Gf30OQJk0m/view?usp=drive_link",
+  "https://drive.google.com/file/d/1r3w3wBingSUWVkRPO02ZsTo7GHD36Fj3/view?usp=drive_link",
+  "https://drive.google.com/file/d/18QYAWTpV8Xs2_X9qJf8OIXLGpgZ9npM4/view?usp=drive_link",
+  "https://drive.google.com/file/d/1jScuav9S13MO9h5H7lpGdrFh8swoluP4/view?usp=drive_link",
+  "https://drive.google.com/file/d/1ompnkstFJkeOLlFPZ1_fgpCvSdBL6Icc/view?usp=drive_link",
+  "https://drive.google.com/file/d/14gSdg-wfIyboZtOOUH3czi3f159jmiYr/view?usp=drive_link",
+  "https://drive.google.com/file/d/1q5vSYgqhtt-WlI8oYBmDnEr-3JkZjjYx/view?usp=drive_link",
+  "https://drive.google.com/file/d/1bmAbgkUmkyQTkypLt9C-9eSGOc2bJWc3/view?usp=drive_link",
+  "https://drive.google.com/file/d/1NZEW91gA_LoD7xl8N4aXipBqKZSA5xX3/view?usp=drive_link",
+];
+
+const videoWorks: PortfolioItem[] = videoLinks.map((link, index) => ({
+  id: 500 + index,
+  title: `Video Editing Project ${String(index + 1).padStart(2, "0")}`,
+  category: "Videos",
+  image: `/portfolio/videos/video-${String(index + 1).padStart(2, "0")}.png`,
+  link,
+  actionLabel: "Watch Video",
+}));
+
 const portfolioItems: PortfolioItem[] = [
   ...corporateWorks,
   ...politicalWorks,
   ...festivalWorks,
   ...thumbnailWorks,
+  ...websiteWorks,
+  ...videoWorks,
 ];
 
 const categories: {
   name: Category;
   count: number;
-  comingSoon?: boolean;
 }[] = [
   {
     name: "Corporate",
@@ -101,13 +150,11 @@ const categories: {
   },
   {
     name: "Websites",
-    count: 0,
-    comingSoon: true,
+    count: 2,
   },
   {
     name: "Videos",
-    count: 0,
-    comingSoon: true,
+    count: 15,
   },
 ];
 
@@ -136,7 +183,9 @@ export default function Portfolio() {
     if (!selectedItem || filteredItems.length === 0) return;
 
     const previousIndex =
-      selectedIndex <= 0 ? filteredItems.length - 1 : selectedIndex - 1;
+      selectedIndex <= 0
+        ? filteredItems.length - 1
+        : selectedIndex - 1;
 
     setSelectedItem(filteredItems[previousIndex]);
   };
@@ -145,9 +194,20 @@ export default function Portfolio() {
     if (!selectedItem || filteredItems.length === 0) return;
 
     const nextIndex =
-      selectedIndex >= filteredItems.length - 1 ? 0 : selectedIndex + 1;
+      selectedIndex >= filteredItems.length - 1
+        ? 0
+        : selectedIndex + 1;
 
     setSelectedItem(filteredItems[nextIndex]);
+  };
+
+  const handleItemClick = (item: PortfolioItem) => {
+    if (item.link) {
+      window.open(item.link, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    setSelectedItem(item);
   };
 
   useEffect(() => {
@@ -185,7 +245,6 @@ export default function Portfolio() {
         id="portfolio"
         className="relative overflow-hidden bg-[#f7fbff] py-20 sm:py-24 lg:py-28"
       >
-        {/* Background Decorations */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
@@ -200,7 +259,6 @@ export default function Portfolio() {
         <div className="pointer-events-none absolute -right-44 bottom-10 h-[460px] w-[460px] rounded-full bg-[#173652]/10 blur-[130px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 xl:px-6">
-          {/* Heading */}
           <motion.div
             initial={{
               opacity: 0,
@@ -236,15 +294,15 @@ export default function Portfolio() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
-              A showcase of corporate designs, political campaigns, festival
-              creatives, YouTube projects and digital experiences created by
-              SM Tech Media.
+              A showcase of corporate designs, political campaigns,
+              festival creatives, YouTube thumbnails, websites and video
+              projects created by SM Tech Media.
             </p>
 
             <div className="mt-6 inline-flex items-center gap-3 rounded-2xl border border-[#173652]/10 bg-white px-5 py-3 shadow-[0_12px_35px_rgba(23,54,82,0.08)]">
               <span className="text-2xl font-black text-[#4DA3FF]">
-                35+
-              </span>
+  {portfolioItems.length}+
+</span>
 
               <span className="text-sm font-bold text-[#173652]">
                 Creative Projects
@@ -252,7 +310,6 @@ export default function Portfolio() {
             </div>
           </motion.div>
 
-          {/* Filters */}
           <motion.div
             initial={{
               opacity: 0,
@@ -279,137 +336,154 @@ export default function Portfolio() {
                 <button
                   key={category.name}
                   type="button"
-                  disabled={category.comingSoon}
-                  onClick={() => {
-                    if (!category.comingSoon) {
-                      setActiveCategory(category.name);
-                    }
-                  }}
+                  onClick={() => setActiveCategory(category.name)}
                   className={`relative rounded-xl px-5 py-3 text-sm font-bold transition-all duration-300 ${
-                    category.comingSoon
-                      ? "cursor-not-allowed border border-slate-200 bg-slate-100 text-slate-400"
-                      : isActive
+                    isActive
                       ? "bg-[#173652] text-white shadow-[0_12px_30px_rgba(23,54,82,0.25)]"
                       : "border border-[#173652]/10 bg-white text-[#173652] shadow-sm hover:-translate-y-1 hover:border-[#4DA3FF]/40 hover:text-[#4DA3FF]"
                   }`}
                 >
                   <span>{category.name}</span>
 
-                  {!category.comingSoon && (
-                    <span
-                      className={`ml-2 rounded-full px-2 py-0.5 text-[10px] ${
-                        isActive
-                          ? "bg-white/15 text-white"
-                          : "bg-[#4DA3FF]/10 text-[#4DA3FF]"
-                      }`}
-                    >
-                      {category.count}
-                    </span>
-                  )}
-
-                  {category.comingSoon && (
-                    <span className="ml-2 text-[9px] font-black uppercase tracking-wider">
-                      Soon
-                    </span>
-                  )}
+                  <span
+                    className={`ml-2 rounded-full px-2 py-0.5 text-[10px] ${
+                      isActive
+                        ? "bg-white/15 text-white"
+                        : "bg-[#4DA3FF]/10 text-[#4DA3FF]"
+                    }`}
+                  >
+                    {category.count}
+                  </span>
                 </button>
               );
             })}
           </motion.div>
 
-          {/* Gallery */}
           <motion.div
             layout
             className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             <AnimatePresence mode="popLayout">
-              {filteredItems.map((item, index) => (
-                <motion.article
-                  layout
-                  key={item.id}
-                  initial={{
-                    opacity: 0,
-                    y: 30,
-                    scale: 0.96,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 20,
-                    scale: 0.95,
-                  }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.045,
-                    ease: "easeOut",
-                  }}
-                  className="group relative overflow-hidden rounded-[26px] border border-[#173652]/10 bg-white shadow-[0_15px_45px_rgba(23,54,82,0.09)] transition-all duration-500 hover:-translate-y-2 hover:border-[#4DA3FF]/30 hover:shadow-[0_28px_70px_rgba(23,54,82,0.18)]"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedItem(item)}
-                    className="block w-full text-left"
-                    aria-label={`View ${item.title}`}
+              {filteredItems.map((item, index) => {
+                const isVideo = item.category === "Videos";
+                const isWebsite = item.category === "Websites";
+
+                const isLandscape =
+                  item.category === "YouTube" ||
+                  isVideo ||
+                  isWebsite;
+
+                return (
+                  <motion.article
+                    layout
+                    key={item.id}
+                    initial={{
+                      opacity: 0,
+                      y: 30,
+                      scale: 0.96,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      y: 20,
+                      scale: 0.95,
+                    }}
+                    transition={{
+                      duration: 0.45,
+                      delay: index * 0.045,
+                      ease: "easeOut",
+                    }}
+                    className="group relative overflow-hidden rounded-[26px] border border-[#173652]/10 bg-white shadow-[0_15px_45px_rgba(23,54,82,0.09)] transition-all duration-500 hover:-translate-y-2 hover:border-[#4DA3FF]/30 hover:shadow-[0_28px_70px_rgba(23,54,82,0.18)]"
                   >
-                    <div
-                      className={`relative w-full overflow-hidden ${
-                        item.category === "YouTube"
-                          ? "aspect-video"
-                          : "aspect-square"
-                      }`}
+                    <button
+                      type="button"
+                      onClick={() => handleItemClick(item)}
+                      className="block w-full text-left"
+                      aria-label={
+                        item.link
+                          ? `${item.actionLabel} - ${item.title}`
+                          : `View ${item.title}`
+                      }
                     >
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
+                      <div
+                        className={`relative w-full overflow-hidden ${
+                          isLandscape
+                            ? "aspect-video"
+                            : "aspect-square"
+                        }`}
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d263d]/90 via-[#173652]/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0d263d]/90 via-[#173652]/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
 
-                      <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#173652]/85 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-white backdrop-blur-md">
-                        {item.category}
-                      </div>
+                        <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#173652]/85 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-white backdrop-blur-md">
+                          {item.category}
+                        </div>
 
-                      <div className="absolute inset-x-0 bottom-0 translate-y-3 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                        <p className="text-lg font-black text-white">
-                          {item.title}
-                        </p>
+                        {isWebsite && (
+                          <div className="absolute right-4 top-4 rounded-full border border-white/30 bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.12em] text-[#173652] shadow-lg">
+                            Live
+                          </div>
+                        )}
 
-                        <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-black text-[#173652]">
-                          View Creative
-                          <span className="text-base">↗</span>
+                        {isVideo && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-white/95 pl-1 text-2xl text-[#173652] shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#4DA3FF] group-hover:text-white">
+                              ▶
+                            </span>
+                          </div>
+                        )}
+
+                        <div className="absolute inset-x-0 bottom-0 translate-y-3 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                          <p className="text-lg font-black text-white">
+                            {item.title}
+                          </p>
+
+                          <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-black text-[#173652]">
+                            {item.actionLabel ?? "View Creative"}
+                            <span className="text-base">
+                              {isVideo ? "▶" : "↗"}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center justify-between gap-4 p-4">
-                      <div>
-                        <p className="text-sm font-black text-[#173652] sm:text-base">
-                          {item.title}
-                        </p>
+                      <div className="flex items-center justify-between gap-4 p-4">
+                        <div>
+                          <p className="text-sm font-black text-[#173652] sm:text-base">
+                            {item.title}
+                          </p>
 
-                        <p className="mt-1 text-xs font-semibold text-slate-500">
-                          SM Tech Media
-                        </p>
+                          <p className="mt-1 text-xs font-semibold text-slate-500">
+                            {isWebsite
+                              ? "Website Development"
+                              : isVideo
+                              ? "Video Editing"
+                              : "SM Tech Media"}
+                          </p>
+                        </div>
+
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#173652]/5 text-lg font-bold text-[#173652] transition-all duration-300 group-hover:bg-[#4DA3FF] group-hover:text-white">
+                          {isVideo ? "▶" : "↗"}
+                        </span>
                       </div>
-
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#173652]/5 text-lg font-bold text-[#173652] transition-all duration-300 group-hover:bg-[#4DA3FF] group-hover:text-white">
-                        ↗
-                      </span>
-                    </div>
-                  </button>
-                </motion.article>
-              ))}
+                    </button>
+                  </motion.article>
+                );
+              })}
             </AnimatePresence>
           </motion.div>
 
-          {/* CTA */}
           <motion.div
             initial={{
               opacity: 0,
@@ -436,8 +510,9 @@ export default function Portfolio() {
               </p>
 
               <p className="mt-3 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
-                From strategy to design and video, we create digital experiences
-                that make your brand look professional and stand out.
+                From strategy to design and video, we create digital
+                experiences that make your brand look professional and
+                stand out.
               </p>
             </div>
 
@@ -452,9 +527,8 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Lightbox */}
       <AnimatePresence>
-        {selectedItem && (
+        {selectedItem && !selectedItem.link && (
           <motion.div
             initial={{
               opacity: 0,
