@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,12 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-JY6Q6NBGKR";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.smtechmedia.com"),
+
   title: {
     default: "SM Tech Media | Digital Marketing Agency",
     template: "%s | SM Tech Media",
@@ -66,6 +72,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
+    url: "https://www.smtechmedia.com",
     siteName: "SM Tech Media",
     title: "SM Tech Media | Digital Marketing Agency",
     description:
@@ -112,6 +119,26 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </head>
+
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
