@@ -20,6 +20,8 @@ const quickLinks = [
   { name: "Portfolio", href: "#portfolio" },
   { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+{ name: "Terms & Conditions", href: "/terms-and-conditions" },
 ];
 
 const services = [
@@ -429,6 +431,23 @@ export default function Footer() {
             <span className="font-bold text-white/82">SM Tech Media.</span> All
             Rights Reserved.
           </p>
+          <div className="mt-2 flex flex-wrap justify-center gap-4 text-sm text-white/50 sm:justify-start">
+  <a
+    href="/privacy-policy"
+    className="transition-colors duration-300 hover:text-white"
+  >
+    Privacy Policy
+  </a>
+
+  <span>|</span>
+
+  <a
+    href="/terms-and-conditions"
+    className="transition-colors duration-300 hover:text-white"
+  >
+    Terms & Conditions
+  </a>
+</div>
 
           <p className="flex flex-wrap items-center justify-center gap-2 text-base font-medium text-white/55 sm:justify-end">
             Designed &amp; Developed by
