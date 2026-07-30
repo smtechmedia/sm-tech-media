@@ -157,6 +157,14 @@ export default function RootLayout({
 
               email: "smtechmedia206@gmail.com",
               telephone: "+919908540952",
+              address: {
+  "@type": "PostalAddress",
+  streetAddress: "Gopalapuram",
+  addressLocality: "Gopalapuram",
+  addressRegion: "Andhra Pradesh",
+  postalCode: "534316",
+  addressCountry: "IN",
+},
               foundingDate: "2025",
 
               founder: {
