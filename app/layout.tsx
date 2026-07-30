@@ -137,46 +137,108 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+                <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://www.smtechmedia.com/#organization",
+
+              name: "SM Tech Media",
+              url: "https://www.smtechmedia.com",
+              logo: "https://www.smtechmedia.com/logo.png",
+              image: "https://www.smtechmedia.com/logo.png",
+
+              description:
+                "SM Tech Media is a professional digital marketing agency providing website development, graphic designing, video editing, social media management, YouTube SEO and political campaign services.",
+
+              email: "smtechmedia206@gmail.com",
+              telephone: "+919908540952",
+              foundingDate: "2025",
+
+              founder: {
+                "@type": "Person",
+                name: "Sunil Marapatla",
+              },
+
+              sameAs: [
+                "https://www.facebook.com/SMTechMediaOfficial",
+                "https://www.instagram.com/sm_tech_media",
+                "https://www.youtube.com/@SMMovieEvents",
+              ],
+            }),
+          }}
+        />
+
         <Script
-  id="organization-schema"
-  type="application/ld+json"
-  strategy="afterInteractive"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://www.smtechmedia.com/#organization",
+          id="local-business-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "@id": "https://www.smtechmedia.com/#localbusiness",
 
-      name: "SM Tech Media",
+              name: "SM Tech Media",
+              url: "https://www.smtechmedia.com",
+              logo: "https://www.smtechmedia.com/logo.png",
+              image: "https://www.smtechmedia.com/logo.png",
 
-      url: "https://www.smtechmedia.com",
+              description:
+                "SM Tech Media is a digital marketing agency offering website development, graphic designing, video editing, social media management, YouTube SEO, branding and political campaign services.",
 
-      logo: "https://www.smtechmedia.com/logo.png",
+              telephone: "+919908540952",
+              email: "smtechmedia206@gmail.com",
 
-      image: "https://www.smtechmedia.com/logo.png",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Gopalapuram",
+                addressLocality: "Gopalapuram",
+                addressRegion: "Andhra Pradesh",
+                postalCode: "534316",
+                addressCountry: "IN",
+              },
 
-      description:
-        "SM Tech Media is a professional digital marketing agency providing website development, graphic designing, video editing, social media management, YouTube SEO and political campaign services.",
+              areaServed: {
+                "@type": "Country",
+                name: "India",
+              },
 
-      email: "smtechmedia206@gmail.com",
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                  ],
+                  opens: "00:00",
+                  closes: "23:59",
+                },
+              ],
 
-      telephone: "+919908540952",
+              priceRange: "₹₹",
 
-      foundingDate: "2025",
+              parentOrganization: {
+                "@id": "https://www.smtechmedia.com/#organization",
+              },
 
-      founder: {
-        "@type": "Person",
-        name: "Sunil Marapatla",
-      },
-
-      sameAs: [
-        "https://www.facebook.com/SMTechMediaOfficial",
-        "https://www.instagram.com/sm_tech_media",
-        "https://www.youtube.com/@SMMovieEvents"
-      ],
-    }),
-  }}
-/>
+              sameAs: [
+                "https://www.facebook.com/SMTechMediaOfficial",
+                "https://www.instagram.com/sm_tech_media",
+                "https://www.youtube.com/@SMMovieEvents",
+              ],
+            }),
+          }}
+        />
       </head>
 
       <body className="flex min-h-full flex-col">{children}</body>
