@@ -120,6 +120,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -137,7 +138,9 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
-                <Script
+
+        {/* Organization Schema */}
+        <Script
           id="organization-schema"
           type="application/ld+json"
           strategy="afterInteractive"
@@ -149,6 +152,7 @@ export default function RootLayout({
 
               name: "SM Tech Media",
               url: "https://www.smtechmedia.com",
+
               logo: "https://www.smtechmedia.com/logo.png",
               image: "https://www.smtechmedia.com/logo.png",
 
@@ -157,14 +161,16 @@ export default function RootLayout({
 
               email: "smtechmedia206@gmail.com",
               telephone: "+919908540952",
+
               address: {
-  "@type": "PostalAddress",
-  streetAddress: "Gopalapuram",
-  addressLocality: "Gopalapuram",
-  addressRegion: "Andhra Pradesh",
-  postalCode: "534316",
-  addressCountry: "IN",
-},
+                "@type": "PostalAddress",
+                streetAddress: "Gopalapuram",
+                addressLocality: "Gopalapuram",
+                addressRegion: "Andhra Pradesh",
+                postalCode: "534316",
+                addressCountry: "IN",
+              },
+
               foundingDate: "2025",
 
               founder: {
@@ -181,6 +187,7 @@ export default function RootLayout({
           }}
         />
 
+        {/* Local Business Schema */}
         <Script
           id="local-business-schema"
           type="application/ld+json"
@@ -193,6 +200,7 @@ export default function RootLayout({
 
               name: "SM Tech Media",
               url: "https://www.smtechmedia.com",
+
               logo: "https://www.smtechmedia.com/logo.png",
               image: "https://www.smtechmedia.com/logo.png",
 
@@ -228,8 +236,8 @@ export default function RootLayout({
                     "Saturday",
                     "Sunday",
                   ],
-                  opens: "00:00",
-                  closes: "23:59",
+                  opens: "09:00",
+                  closes: "21:00",
                 },
               ],
 
@@ -244,6 +252,37 @@ export default function RootLayout({
                 "https://www.instagram.com/sm_tech_media",
                 "https://www.youtube.com/@SMMovieEvents",
               ],
+            }),
+          }}
+        />
+
+        {/* Website Schema */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://www.smtechmedia.com/#website",
+
+              url: "https://www.smtechmedia.com",
+              name: "SM Tech Media",
+
+              alternateName: [
+                "SM Tech Media Digital Marketing Agency",
+                "SM Tech Media Agency",
+              ],
+
+              description:
+                "Official website of SM Tech Media, a digital marketing and creative agency providing website development, graphic designing, video editing, social media management, YouTube SEO, branding and political campaign services.",
+
+              inLanguage: "en-IN",
+
+              publisher: {
+                "@id": "https://www.smtechmedia.com/#organization",
+              },
             }),
           }}
         />
