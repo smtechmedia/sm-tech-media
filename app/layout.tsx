@@ -286,6 +286,101 @@ export default function RootLayout({
             }),
           }}
         />
+      {/* Service Schema */}
+<Script
+  id="service-schema"
+  type="application/ld+json"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": "https://www.smtechmedia.com/#services",
+
+      name: "SM Tech Media Services",
+
+      itemListElement: [
+        {
+          "@type": "Service",
+          position: 1,
+          name: "Website Design & Development",
+          description:
+            "Professional website design and development services for businesses, organizations and brands.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 2,
+          name: "Social Media Management",
+          description:
+            "Professional social media management, content planning and digital presence management for businesses and organizations.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 3,
+          name: "Graphic Designing",
+          description:
+            "Creative graphic design services including social media creatives, posters, promotional designs and branding materials.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 4,
+          name: "Video Editing",
+          description:
+            "Professional video editing services for promotional videos, social media content, events and digital campaigns.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 5,
+          name: "YouTube SEO",
+          description:
+            "YouTube SEO and channel optimization services designed to improve content discoverability and online reach.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 6,
+          name: "Digital Marketing",
+          description:
+            "Digital marketing solutions for businesses, brands and organizations to strengthen their online presence.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+        {
+          "@type": "Service",
+          position: 7,
+          name: "Political Campaign Services",
+          description:
+            "Digital campaign, creative design, video editing and social media support services for political campaigns.",
+          provider: {
+            "@id": "https://www.smtechmedia.com/#organization",
+          },
+          areaServed: "India",
+        },
+      ],
+    }),
+  }}
+/>
       </head>
 
       <body className="flex min-h-full flex-col">{children}</body>
